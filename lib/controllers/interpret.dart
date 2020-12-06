@@ -49,7 +49,7 @@ class Interpret {
   }
 
   Future<PBIntermediateTree> interpretAndOptimize(NodeTree tree) async {
-    _pb_intermediate_tree = PBIntermediateTree(projectName, tree.sharedStyles);
+    _pb_intermediate_tree = PBIntermediateTree(projectName, tree.sharedStyles, tree.sharedSymbols);
 
     ///3rd Party Symbols
     if (tree.miscPages != null) {

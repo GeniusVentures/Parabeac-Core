@@ -109,7 +109,7 @@ class FlutterProjectBuilder {
     }
 
     // generate shared Styles if any found
-    if (mainTree.sharedStyles.isNotEmpty) {
+    if (mainTree.sharedStyles.isNotEmpty || mainTree.sharedSymbols.isNotEmpty) {
       await Directory('${pathToFlutterProject}lib/document/').create(recursive: true).then((value) {
           var s = File('${pathToFlutterProject}lib/document/shared_props.g.dart').openWrite(mode: FileMode.write, encoding: utf8);
           s.write('''import 'dart:ui';
@@ -118,6 +118,11 @@ class FlutterProjectBuilder {
               ''');
           for (var sharedStyle in mainTree.sharedStyles) {
             s.write(sharedStyle.generate() + '\n');
+          }
+
+          // could we add this as a masterSymbol?
+          for (var sharedSymbol in mainTree.sharedSymbols.entries) {
+            // s.write(sharedSymbol.generate() + '\n');
           }
           s.close();
       }).catchError((e) {

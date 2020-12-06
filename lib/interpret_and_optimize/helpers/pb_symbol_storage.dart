@@ -42,7 +42,7 @@ class PBSymbolStorage {
     return true;
   }
 
-  ///Add [PBSharedMasterNode] tointo the storage, return `true` of added else
+  ///Add [PBSharedMasterNode] into the storage, return `true` of added else
   ///`false` if it exists.
   Future<bool> addSharedMasterNode(PBSharedMasterNode masterNode) async {
     if (_pbSharedMasterNodes.containsKey(masterNode.UUID)) {
@@ -53,7 +53,7 @@ class PBSymbolStorage {
     return true;
   }
 
-  ///Getting the symbol instace that contains the specific
+  ///Getting the symbol instance that contains the specific
   PBIntermediateNode getSymbolInstance(String id) {
     return _pbSharedInstanceNodes[id];
   }
@@ -71,7 +71,7 @@ class PBSymbolStorage {
   ///Looks for the symbol in both the [_pbSharedMasterNodes] and
   ///the [pageSymbols] maps
   PBIntermediateNode getSymbol(String id) {
-    var node = getSharedInstaceNode(id);
+    var node = getSharedInstanceNode(id);
     node ??= getSharedMasterNode(id) as PBIntermediateNode;
     return node;
   }
@@ -96,7 +96,7 @@ class PBSymbolStorage {
           (element) => element.SYMBOL_ID == symbolID,
           orElse: () => null);
 
-  PBSharedInstanceIntermediateNode getSharedInstaceNode(String id) =>
+  PBSharedInstanceIntermediateNode getSharedInstanceNode(String id) =>
       _pbSharedInstanceNodes['$id'];
 
   String getNameOfSymbolWithID(String id) {

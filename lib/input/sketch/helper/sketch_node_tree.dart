@@ -3,6 +3,7 @@ import 'package:parabeac_core/controllers/sketch_controller.dart';
 import 'package:parabeac_core/input/helper/node_tree.dart';
 import 'package:parabeac_core/input/sketch/entities/documents/document.dart';
 import 'package:parabeac_core/input/sketch/entities/layers/page.dart';
+import 'package:parabeac_core/input/sketch/entities/layers/symbol_instance.dart';
 import 'package:parabeac_core/input/sketch/entities/objects/foreign_symbol.dart';
 import 'package:parabeac_core/input/sketch/entities/style/shared_style.dart';
 import 'package:parabeac_core/input/sketch/entities/style/style.dart';
@@ -31,6 +32,7 @@ class SketchNodeTree extends NodeTree {
     _originalArchive = _ids.archive;
     miscPages.add(_setThirdPartySymbols());
     sharedStyles = _setSharedStyles();
+    sharedSymbols = _setSharedSymbols();
     pages.addAll(_setConventionalPages(_pagesAndArtboards));
     if (debug) {
       print(pages);
@@ -69,6 +71,30 @@ class SketchNodeTree extends NodeTree {
       return null;
     }
 
+  }
+
+  Map<String, SymbolInstance> _setSharedSymbols() {
+    try {
+      Map<String, SymbolInstance> sharedSymbols = {};
+      var jsonData = _ids.documentFile;
+      var doc = Document.fromJson(jsonData);
+      if (doc.layerSymbols != null) {
+        var LayerSymbols = doc.layerSymbols['objects'] ?? [];
+        for (var sharedSymbol in LayerSymbols) {
+//          var layerSymbol = SymbolInstance.fromJson(sharedSymbol);
+//          sharedSymbols[layerSymbol.UUID] = layerSymbol;
+        }
+      }
+
+      return sharedSymbols;
+    } catch (e, stackTrace) {
+      MainInfo().sentry.captureException(
+        exception: e,
+        stackTrace: stackTrace,
+      );
+      log.error(e.toString());
+      return null;
+    }
   }
 
   SketchPage _setThirdPartySymbols() {

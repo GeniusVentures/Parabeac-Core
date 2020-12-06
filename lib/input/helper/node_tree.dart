@@ -1,4 +1,5 @@
 import 'package:parabeac_core/input/helper/page.dart';
+import 'package:parabeac_core/input/sketch/entities/layers/symbol_instance.dart';
 import 'package:parabeac_core/input/sketch/entities/style/shared_style.dart';
 import 'package:quick_log/quick_log.dart';
 
@@ -10,6 +11,7 @@ abstract class NodeTree {
   List<Page> pages = [];
   List<Page> miscPages = [];
   List<SharedStyle> sharedStyles = [];
+  Map<String, SymbolInstance> sharedSymbols = {};
 
   Map<String, Object> toJson() {
     var result = <String, Object>{};

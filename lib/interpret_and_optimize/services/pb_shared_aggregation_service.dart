@@ -29,12 +29,13 @@ class PBSharedInterAggregationService {
   ///it's going to enter in a queue where it waits until that instance is registered.
   void gatherSharedValues(
       PBSharedInstanceIntermediateNode sharedIntermediateNode) {
-    var master = _searchMasterNode(sharedIntermediateNode.SYMBOL_ID);
+    var master = searchMasterNode(sharedIntermediateNode.SYMBOL_ID);
     if (master != null) {
       populateSharedInstanceNode(master, sharedIntermediateNode);
     } else {
       _unregSymQueue.add(sharedIntermediateNode);
     }
+
   }
 
   ///Within its [rootChildNode], look for the [PBSharedParameterProp] of the [PBSharedMasterNode],
@@ -55,7 +56,7 @@ class PBSharedInterAggregationService {
         .removeWhere((prop) => prop == null || prop.value == null);
   }
 
-  ///Its going to check the [PBSharedInstanceIntermediateNode]s and the [PBSharedMasterNode]s that are comming through
+  ///Its going to check the [PBSharedInstanceIntermediateNode]s and the [PBSharedMasterNode]s that are coming through
   ///the [PBSymbolStorage]. To see if we can find the [PBSharedMasterNode] that belongs to the [PBSharedInstanceIntermediateNode]
   ///that do not have their values solved.
   void analyzeSharedNode(dynamic node) {
@@ -98,6 +99,6 @@ class PBSharedInterAggregationService {
     }
   }
 
-  PBSharedMasterNode _searchMasterNode(String masterUUID) =>
+  PBSharedMasterNode searchMasterNode(String masterUUID) =>
       _symbolStorage.getSharedMasterNodeBySymbolID(masterUUID);
 }
