@@ -47,16 +47,10 @@ class PBMasterSymbolGenerator extends PBGenerator {
         var name = signature.friendlyName;
 
         // recurse through any master symbol children, flattening overrides
-        if (signature.type == PBSharedInstanceIntermediateNode) {
-          PBSharedInstanceIntermediateNode pbSI = signature.value;
-          var masterSymbol = PBSymbolStorage().getSharedMasterNodeBySymbolID(pbSI.SYMBOL_ID);
-          if (masterSymbol != null) {
-            buffer.write(_generateParameters(masterSymbol.overridableProperties,
-                masterSymbol.parametersDefinition));
-          }
-        } else {
+//        if (signature.type == PBSharedInstanceIntermediateNode) {
+//        } else {
           buffer.write(('$type $name,'));
-        }
+//        }
       }
     }
     return buffer.toString();
