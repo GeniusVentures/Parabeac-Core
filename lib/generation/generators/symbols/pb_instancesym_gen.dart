@@ -9,7 +9,6 @@ import 'package:parabeac_core/interpret_and_optimize/entities/pb_shared_instance
 import 'package:parabeac_core/interpret_and_optimize/entities/pb_shared_master_node.dart';
 import 'package:parabeac_core/interpret_and_optimize/entities/subclasses/pb_intermediate_node.dart';
 import 'package:parabeac_core/interpret_and_optimize/helpers/pb_symbol_storage.dart';
-import 'package:parabeac_core/interpret_and_optimize/services/intermediate_node_searcher_service.dart';
 import 'package:quick_log/quick_log.dart';
 import 'package:parabeac_core/controllers/main_info.dart';
 
@@ -18,19 +17,31 @@ class PBSymbolInstanceGenerator extends PBGenerator {
 
   var log = Logger('Symbol Instance Generator');
 
-  String genParameters(PBSharedInstanceIntermediateNode source, {String prepend}) {
+  String genParameters(PBSharedInstanceIntermediateNode source) {
 
     var buffer = StringBuffer();
 
     for (PBSharedParameterValue param in source.sharedParamValues ?? []) {
       switch (param.type) {
         case PBSharedInstanceIntermediateNode:
-          PBIntermediateNode intNode = PBSymbolStorage().getSymbolInstance(param.value);
-          intNode ??= PBSymbolStorage().getSharedMasterNodeBySymbolID(param.value);
+          PBIntermediateNode intNode = PBSymbolStorage().getSymbolInstance(param.UUID);
           if (intNode != null) {
-            buffer.write('${param.name}: ${intNode.name},');
-            String siString = genParameters(intNode, prepend: intNode.name);
-            buffer.write(', ${siString}');
+            buffer.write(' ${param.name}: ');
+            var ovrName = SN_UUIDtoVarName[source.UUID +'/' + param.UUID + '_symbolID'];
+            if (ovrName != null) {
+              buffer.write('${ovrName} ?? ');
+            }
+
+            //Remove any special characters and leading numbers from the widget name
+            var name = intNode.name
+                .replaceAll(RegExp(r'[^\w]+'), '')
+                .replaceFirst(RegExp(r'^[\d]+'), '');
+            //Make first letter of method name capitalized
+            name = name[0].toLowerCase() + name.substring(1);
+
+            buffer.write('${name}(context, constraints, ');
+            String siString = genParameters(intNode);
+            buffer.write('${siString} ),');
           }
           break;
         case InheritedBitmap:
@@ -50,7 +61,7 @@ class PBSymbolInstanceGenerator extends PBGenerator {
           buffer.write('${SharedStyle_UUIDToName[param.value] ?? "TextStyle()"},');
           break;
         case Style:
-          buffer.write('${param.name}: null'); // TODO: ${SharedStyle_UUIDToName[param.value] ?? "SharedStyle()"},');
+          buffer.write('${param.name}: null,'); // TODO: ${SharedStyle_UUIDToName[param.value] ?? "SharedStyle()"},');
           break;
         default:
           buffer.write('${param.name}: ');
