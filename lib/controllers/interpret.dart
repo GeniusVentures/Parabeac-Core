@@ -95,13 +95,11 @@ class AITServiceBuilder {
     _stopwatch = Stopwatch();
     _intermediateTree = tree;
 
-    if (transformations != null) {
-      transformations.forEach(addTransformation);
-      if (_verifyTransformationsFailed()) {
-        throw Error();
-      }
+    transformations.forEach(addTransformation);
+    if (_verifyTransformationsFailed()) {
+      throw Error();
     }
-  }
+    }
 
   /// Adding a [transformation] that will be applyed to the [PBIntermediateTree]. The [id]
   /// is to [log] the [transformation].

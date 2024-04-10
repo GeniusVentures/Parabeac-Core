@@ -6,7 +6,6 @@ import 'package:parabeac_core/interpret_and_optimize/entities/inherited_containe
 import 'package:parabeac_core/interpret_and_optimize/entities/injected_container.dart';
 import 'package:parabeac_core/interpret_and_optimize/entities/subclasses/pb_intermediate_node.dart';
 import 'package:parabeac_core/interpret_and_optimize/helpers/pb_context.dart';
-import 'dart:math';
 
 class PBContainerGenerator extends PBGenerator {
   String color;

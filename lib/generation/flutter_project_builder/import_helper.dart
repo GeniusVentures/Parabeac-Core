@@ -56,7 +56,7 @@ class ImportHelper implements FileWriterObserver {
   List getFormattedImports(String UUID,
       {dynamic Function(String import) importMapper}) {
     importMapper ??= (String path) => path;
-    return getImport(UUID)?.map(importMapper)?.toList() ?? [];
+    return getImport(UUID).map(importMapper).toList() ?? [];
   }
 
   /// Looks that we are not tracking the file in the imports by comparing the
@@ -75,7 +75,7 @@ class ImportHelper implements FileWriterObserver {
   /// when we [addImport] `<path>/example.dart`, then `<another-path>/example.dart`, only
   /// the `<path>/example.dart` is going to be recorded in [imports].
   void addImport(String import, String UUID) {
-    if (import != null && UUID != null && !containsBaseName(import)) {
+    if (!containsBaseName(import)) {
       imports[UUID] ??= {};
       imports[UUID].add(import);
       _importBaseNames.add(p.basename(import));

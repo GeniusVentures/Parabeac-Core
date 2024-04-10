@@ -34,7 +34,7 @@ abstract class PBLayoutGenerator extends PBGenerator {
       String crossAxisAlignment = source['alignment'];
       var items = crossAxisAlignment.split('.');
       buffer.write(
-          'crossAxisAlignment: ${items[0]}.${items[1]?.toLowerCase() ?? 'start'}');
+          'crossAxisAlignment: ${items[0]}.${items[1].toLowerCase() ?? 'start'}');
     }
     return buffer.toString();
   }

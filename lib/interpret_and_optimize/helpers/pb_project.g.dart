@@ -17,5 +17,5 @@ PBProject _$PBProjectFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBProjectToJson(PBProject instance) => <String, dynamic>{
       'name': instance.projectName,
       'projectAbsPath': instance.projectAbsPath,
-      'pages': instance.forest?.map((e) => e?.toJson())?.toList(),
+      'pages': instance.forest.map((e) => e?.toJson()).toList(),
     };

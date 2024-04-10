@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:parabeac_core/generation/prototyping/pb_prototype_node.dart';
 import 'package:parabeac_core/interpret_and_optimize/entities/interfaces/pb_injected_intermediate.dart';
 import 'package:parabeac_core/interpret_and_optimize/entities/interfaces/pb_prototype_enabled.dart';
@@ -42,7 +41,7 @@ abstract class PBLayoutIntermediateNode extends PBIntermediateNode
 
   @override
   void childrenModified(List<PBIntermediateNode> children, [PBContext context]) {
-    if (children != null && children.isNotEmpty) {
+    if (children.isNotEmpty) {
       if(context != null){
         resize(context, children);
       }

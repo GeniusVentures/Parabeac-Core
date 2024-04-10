@@ -25,9 +25,6 @@ class ImageReferenceStorage {
   /// Adds the reference to the image and writes the png to the assets folder.
   /// Returns true if the image was written successfully, false otherwise
   bool addReferenceAndWrite(String name, String path, Uint8List image) {
-    if(image == null){
-      return false;
-    }
     var imgPath = p.join(MainInfo().pngPath, '$name.png');
     if (image == null &&
         File('${MainInfo().cwd?.path}/lib/input/assets/image-conversion-error.png')
@@ -49,7 +46,7 @@ class ImageReferenceStorage {
   }
 
   bool addReference(String name, String path) {
-    if (name != null && path != null && name.isNotEmpty && path.isNotEmpty) {
+    if (name.isNotEmpty && path.isNotEmpty) {
       images_references[name] = path;
       return true;
     } else {

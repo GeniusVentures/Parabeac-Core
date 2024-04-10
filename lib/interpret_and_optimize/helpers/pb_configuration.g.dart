@@ -12,7 +12,7 @@ PBConfiguration _$PBConfigurationFromJson(Map<String, dynamic> json) {
     json['widgetType'] as String ?? 'Stateless',
     json['widgetSpacing'] as String ?? 'Expanded',
     json['state-management'] as String ?? 'None',
-    (json['layoutPrecedence'] as List)?.map((e) => e as String)?.toList() ??
+    (json['layoutPrecedence'] as List).map((e) => e as String).toList() ??
         ['column', 'row', 'stack'],
     json['breakpoints'] as Map<String, dynamic>,
     json['scaling'] as bool ?? true,

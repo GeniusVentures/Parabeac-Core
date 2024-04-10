@@ -28,11 +28,11 @@ class PBSizeHelper extends PBAttributesHelper {
 
     if (context.sizingContext == SizingValueContext.ScaleValue) {
       relativeHeight =
-          (relativeHeight != null && screenHeight != null && screenHeight > 0.0)
+          (screenHeight != null && screenHeight > 0.0)
               ? relativeHeight / screenHeight
               : relativeHeight;
       relativeWidth =
-          (relativeWidth != null && screenWidth != null && screenWidth > 0.0)
+          (screenWidth != null && screenWidth > 0.0)
               ? relativeWidth / screenWidth
               : relativeWidth;
       var height = source.constraints.fixedHeight
@@ -55,13 +55,9 @@ class PBSizeHelper extends PBAttributesHelper {
     } else {
       // relativeHeight = body['height'];
       // relativeWidth = body['width'];
-      if (relativeWidth != null) {
-        buffer.write('width: ${relativeWidth.toStringAsFixed(3)},');
-      }
-      if (relativeHeight != null) {
-        buffer.write('height: ${relativeHeight.toStringAsFixed(3)},');
-      }
-    }
+      buffer.write('width: ${relativeWidth.toStringAsFixed(3)},');
+          buffer.write('height: ${relativeHeight.toStringAsFixed(3)},');
+        }
 
     return buffer.toString();
   }

@@ -53,7 +53,7 @@ class InheritedCircle extends PBVisualIntermediateNode
 
     auxiliaryData.borderInfo = IntermediateBorderInfo();
     auxiliaryData.borderInfo.shape = 'circle';
-    auxiliaryData.alignment = alignX != null && alignY != null
+    auxiliaryData.alignment = alignY != null
         ? {'alignX': alignX, 'alignY': alignY}
         : null;
   }

@@ -5,7 +5,6 @@ import 'package:parabeac_core/interpret_and_optimize/entities/subclasses/pb_visu
 import 'package:parabeac_core/interpret_and_optimize/helpers/align_strategy.dart';
 import 'package:parabeac_core/interpret_and_optimize/helpers/child_strategy.dart';
 import 'package:parabeac_core/interpret_and_optimize/helpers/pb_context.dart';
-import 'dart:math';
 
 class Padding extends PBVisualIntermediateNode {
   double left, right, top, bottom, screenWidth, screenHeight;
@@ -41,19 +40,19 @@ class Padding extends PBVisualIntermediateNode {
     /// executes just before the generator generates the code for the [PBIntermediateNode].
     screenHeight = screenHeight == 0 ? 1 : screenHeight;
     screenWidth = screenWidth == 0 ? 1 : screenWidth;
-    if (left != null && !childToParentConstraints.pinLeft) {
+    if (!childToParentConstraints.pinLeft) {
       left = (left / screenWidth);
       left = left < 0.01 ? 0.0 : left;
     }
-    if (right != null && !childToParentConstraints.pinRight) {
+    if (!childToParentConstraints.pinRight) {
       right = right / screenWidth;
       right = right < 0.01 ? 0.0 : right;
     }
-    if (top != null && !childToParentConstraints.pinTop) {
+    if (!childToParentConstraints.pinTop) {
       top = top / screenHeight;
       top = top < 0.01 ? 0.0 : top;
     }
-    if (bottom != null && !childToParentConstraints.pinBottom) {
+    if (!childToParentConstraints.pinBottom) {
       bottom = bottom / screenHeight;
       bottom = bottom < 0.01 ? 0.0 : bottom;
     }

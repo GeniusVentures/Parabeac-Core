@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:parabeac_core/generation/generators/visual-widgets/pb_container_gen.dart';
 import 'package:parabeac_core/generation/prototyping/pb_prototype_node.dart';
@@ -53,7 +52,7 @@ class InheritedContainer extends PBVisualIntermediateNode
     childrenStrategy = TempChildrenStrategy('child');
     //TODO switch alignment to Padding alignment
 
-    auxiliaryData.alignment = alignX != null && alignY != null
+    auxiliaryData.alignment = alignY != null
         ? {'alignX': alignX, 'alignY': alignY}
         : null;
   }

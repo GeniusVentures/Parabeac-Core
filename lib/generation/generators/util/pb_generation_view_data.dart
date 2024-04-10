@@ -47,7 +47,6 @@ class PBGenerationViewData {
 
   void addToDispose(String dispose) {
     if (!_isDataLocked &&
-        dispose != null &&
         dispose.isNotEmpty &&
         !_toDispose.contains(dispose)) {
       _toDispose.add(dispose);

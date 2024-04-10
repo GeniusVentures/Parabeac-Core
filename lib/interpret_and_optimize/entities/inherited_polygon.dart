@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:typed_data';
 import 'package:parabeac_core/controllers/main_info.dart';
 import 'package:parabeac_core/generation/generators/visual-widgets/pb_bitmap_gen.dart';
@@ -55,11 +54,9 @@ class InheritedPolygon extends PBVisualIntermediateNode
     generator = PBBitmapGenerator();
     childrenStrategy = NoChildStrategy();
 
-    if (image != null) {
-      ImageReferenceStorage().addReferenceAndWrite(
-          UUID, '${MainInfo().outputPath}assets/images', image);
+    ImageReferenceStorage().addReferenceAndWrite(
+        UUID, '${MainInfo().outputPath}assets/images', image);
     }
-  }
 
   static PBIntermediateNode fromJson(Map<String, dynamic> json) =>
       _$InheritedPolygonFromJson(json)

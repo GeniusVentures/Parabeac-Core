@@ -10,7 +10,6 @@ class PBInputFormatter {
       bool spaceToUnderscore = true,
       bool destroyDigits = false,
       bool destroySpecialSym = false}) {
-    assert(input != null);
     var result = _formatStr(input,
         spaceToUnderscore: spaceToUnderscore, destroyDigits: destroyDigits);
 
@@ -50,9 +49,6 @@ class PBInputFormatter {
   /// Method that splits `target` according to `delimeter`
   /// and returns the last entry in the list.
   static String findLastOf(String target, String delimeter) {
-    if (target == null || delimeter == null) {
-      return '';
-    }
     return target.split(delimeter).last;
   }
 }

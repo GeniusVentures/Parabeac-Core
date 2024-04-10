@@ -43,10 +43,8 @@ class InjectedTabBar extends PBEgg implements PBInjectedIntermediate {
     var matchingKey = nameToAttr.keys
         .firstWhere((key) => node.name.contains(key), orElse: () => null);
 
-    if (matchingKey != null) {
-      return nameToAttr[matchingKey];
-    }
-
+    return nameToAttr[matchingKey];
+  
     return super.getAttributeNameOf(node);
   }
 

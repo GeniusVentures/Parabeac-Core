@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:parabeac_core/controllers/main_info.dart';
 import 'package:parabeac_core/generation/generators/symbols/pb_mastersym_gen.dart';
 import 'package:parabeac_core/generation/generators/util/pb_input_formatter.dart';
@@ -68,17 +67,15 @@ class PBSharedMasterNode extends PBVisualIntermediateNode
         ) {
     overridableProperties ??= [];
     try {
-      if (name != null) {
-        //Remove any special characters and leading numbers from the method name
-        friendlyName = name
-            .replaceAll(RegExp(r'[^\w]+'), '')
-            .replaceAll(RegExp(r'/'), '')
-            .replaceFirst(RegExp(r'^[\d]+'), '');
-        //Make first letter of method name capitalized
-        friendlyName =
-            friendlyName[0].toUpperCase() + friendlyName.substring(1);
-      }
-    } catch (e, stackTrace) {
+      //Remove any special characters and leading numbers from the method name
+      friendlyName = name
+          .replaceAll(RegExp(r'[^\w]+'), '')
+          .replaceAll(RegExp(r'/'), '')
+          .replaceFirst(RegExp(r'^[\d]+'), '');
+      //Make first letter of method name capitalized
+      friendlyName =
+          friendlyName[0].toUpperCase() + friendlyName.substring(1);
+        } catch (e, stackTrace) {
       MainInfo().sentry.captureException(
             exception: e,
             stackTrace: stackTrace,
@@ -101,7 +98,7 @@ class PBSharedMasterNode extends PBVisualIntermediateNode
     /// Map overridableProperties which need parent and tree
     (master as PBSharedMasterNode).overridableProperties =
         (json['overrideProperties'] as List)
-                ?.map(
+                .map(
                   (prop) => prop == null
                       ? null
                       : PBSharedParameterProp.createSharedParameter(
@@ -110,11 +107,11 @@ class PBSharedMasterNode extends PBVisualIntermediateNode
                           tree,
                         ),
                 )
-                ?.toList() ??
+                .toList() ??
             [];
 
     // Add override properties to the [OverrideHelper]
-    (master as PBSharedMasterNode)
+    (master)
         .overridableProperties
         .where((element) => element != null)
         .forEach((OverrideHelper.addProperty));

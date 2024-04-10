@@ -46,7 +46,6 @@ class FileSystemAnalyzer {
   bool _projectChecked = false;
 
   FileSystemAnalyzer(String projectPath, {this.fileSystem}) {
-    assert(projectPath != null);
 
     _logger = Logger(runtimeType.toString());
     fileSystem ??= LocalFileSystem();
@@ -57,9 +56,6 @@ class FileSystemAnalyzer {
   }
 
   bool containsFile(String path) {
-    if (path == null) {
-      throw NullThrownError();
-    }
     return _pathSet.contains(p.normalize(path));
   }
 
@@ -69,13 +65,11 @@ class FileSystemAnalyzer {
   /// [level] represents 'how many dots from the end, for example, [level] of
   /// `1` could return `.dart` from `.g.dart`, [level] `2` would return `.g.dart`
   void addFileExtension(String ext, [int level = 1]) {
-    if (ext != null) {
-      /// [ext] could just be `.dart` in which case [p.extension] would return and empty string,
-      /// therefore, we have to check if its just the raw extension or not.
-      ext = ext.startsWith('.') ? ext : p.extension(ext, level);
-      _extensions.add(ext);
+    /// [ext] could just be `.dart` in which case [p.extension] would return and empty string,
+    /// therefore, we have to check if its just the raw extension or not.
+    ext = ext.startsWith('.') ? ext : p.extension(ext, level);
+    _extensions.add(ext);
     }
-  }
 
   /// returns if a [Directory] is present on the path of [_projectPath]
   Future<bool> projectExist() {

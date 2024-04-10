@@ -191,7 +191,7 @@ class PBPlatformOrientationLinkerService extends AITHandler {
   ///
   /// Defaults to PLATFORM.MOBILE if no platform is given.
   PLATFORM _extractPlatform(String name) {
-    var platform = name?.split('/')?.last?.toLowerCase()?.trim() ?? '';
+    var platform = name.split('/').last.toLowerCase().trim() ?? '';
     switch (platform) {
       case 'desktop':
         return PLATFORM.DESKTOP;

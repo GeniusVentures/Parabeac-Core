@@ -29,17 +29,13 @@ class PBColor {
 
 class ColorUtils {
   static String toHex(PBColor color) {
-    if (color != null) {
-      int a, r, g, b;
-      a = ((color.a ?? 0) * 255).round();
-      r = ((color.r ?? 0) * 255).round();
-      g = ((color.g ?? 0) * 255).round();
-      b = ((color.b ?? 0) * 255).round();
-      return '0x' + HEX.encode([a, r, g, b]);
-    } else {
-      return '0x' + HEX.encode([0, 0, 0, 0]);
+    int a, r, g, b;
+    a = ((color.a ?? 0) * 255).round();
+    r = ((color.r ?? 0) * 255).round();
+    g = ((color.g ?? 0) * 255).round();
+    b = ((color.b ?? 0) * 255).round();
+    return '0x' + HEX.encode([a, r, g, b]);
     }
-  }
 
   static String findDefaultColor(String hex) {
     switch (hex) {

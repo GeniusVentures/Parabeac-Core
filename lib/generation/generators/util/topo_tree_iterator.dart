@@ -101,9 +101,7 @@ class CyclicDependencyError extends Error {
   @override
   String toString() {
     var message = 'Cycle Detected on Graph';
-    if (items != null) {
-      message += '. Graph: ${items.toString()}';
-    }
-    return message;
+    message += '. Graph: ${items.toString()}';
+      return message;
   }
 }

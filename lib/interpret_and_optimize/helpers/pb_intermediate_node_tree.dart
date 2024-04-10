@@ -9,7 +9,6 @@ import 'package:parabeac_core/interpret_and_optimize/helpers/pb_context.dart';
 import 'package:quick_log/quick_log.dart';
 import 'package:recase/recase.dart';
 import 'package:tuple/tuple.dart';
-import 'dart:collection';
 import 'package:uuid/uuid.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:directed_graph/directed_graph.dart';
@@ -103,7 +102,7 @@ class PBIntermediateTree extends DirectedGraph<PBIntermediateNode> {
   /// to be the [name] of the [rootNode].
   String _identifier;
   @JsonKey(name: 'name')
-  String get identifier => _identifier?.snakeCase ?? 'no_name_found';
+  String get identifier => _identifier.snakeCase ?? 'no_name_found';
 
   @override
   @JsonKey(ignore: true)
@@ -135,15 +134,6 @@ class PBIntermediateTree extends DirectedGraph<PBIntermediateNode> {
   @override
   void addEdges(Vertex<PBIntermediateNode> parent,
       [List<Vertex<PBIntermediateNode>> children]) {
-    if (children == null) {}
-    // var children = childrenVertices.map((e) => e).toList();
-
-    /// Passing the responsability of acctually adding the [PBIntermediateNode] into
-    /// the [tree] to the [parent.childStrategy]. The main reason for this is to enforce
-    /// the strict policy that some [PBIntermediateNode] have when adding a node. Some
-    /// nodes might just be allowed to have a single child, while others are can have more that
-    /// one child.
-    // ignore: omit_local_variable_types
     ChildrenMod<PBIntermediateNode> addChildren =
         (PBIntermediateNode parent, List<PBIntermediateNode> children) {
       children.forEach((child) {
@@ -156,7 +146,7 @@ class PBIntermediateTree extends DirectedGraph<PBIntermediateNode> {
       });
 
       if (parent is ChildrenObserver && context != null) {
-        (parent as ChildrenObserver).childrenModified(children, context);
+        (parent).childrenModified(children, context);
       }
       return super.addEdges(parent, children);
     };
@@ -168,7 +158,7 @@ class PBIntermediateTree extends DirectedGraph<PBIntermediateNode> {
   void removeEdges(Vertex<PBIntermediateNode> parent,
       [List<Vertex<PBIntermediateNode>> children]) {
     if (parent is ChildrenObserver) {
-      (parent as ChildrenObserver).childrenModified(children, context);
+      (parent).childrenModified(children, context);
     }
     super.removeEdges(parent, children);
   }
@@ -189,7 +179,7 @@ class PBIntermediateTree extends DirectedGraph<PBIntermediateNode> {
   ///
   /// The [dependent] or its [dependent.rootNode] can not be `null`
   void addDependent(PBIntermediateTree dependent) {
-    if (dependent != null && !lockData) {
+    if (!lockData) {
       _dependentsOn.add(dependent);
     }
   }

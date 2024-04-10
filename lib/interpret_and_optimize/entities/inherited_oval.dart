@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'dart:typed_data';
 import 'package:parabeac_core/controllers/main_info.dart';
@@ -47,11 +46,9 @@ class InheritedOval extends PBVisualIntermediateNode
     PBIntermediateConstraints constraints
   }) : super(UUID, frame, name, constraints: constraints) {
     generator = PBBitmapGenerator();
-    if (image != null) {
-      ImageReferenceStorage().addReferenceAndWrite(
-          UUID, '${MainInfo().outputPath}assets/images', image);
+    ImageReferenceStorage().addReferenceAndWrite(
+        UUID, '${MainInfo().outputPath}assets/images', image);
     }
-  }
 
   static PBIntermediateNode fromJson(Map<String, dynamic> json) =>
       _$InheritedOvalFromJson(json)

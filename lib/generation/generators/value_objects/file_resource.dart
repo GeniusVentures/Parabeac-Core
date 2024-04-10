@@ -36,24 +36,16 @@ class FileResource {
       this.fileSystem,
       File file}) {
     assert(
-        (dirName == null && fileName == null) && path == null || file == null,
+        (dirName == null && fileName == null) && path == null,
         'Either the [dirName] & [fileName] or [path] should be specified and not null');
-    if (path != null) {
-      dirName = p.dirname(path);
-      fileName = p.basename(path);
+    dirName = p.dirname(path);
+    fileName = p.basename(path);
 
-      var extInPath = p.extension(path);
-      if (extInPath != null || extInPath.isNotEmpty) {
-        fileExtension = extInPath;
-      }
-    } else if (file != null) {
-      fileName = p.basename(file.path);
-      dirName = p.dirname(file.path);
-      fileExtension = p.extension(file.path);
-    } else {
-      path = p.join(dirName, fileName, fileExtension);
+    var extInPath = p.extension(path);
+    if (extInPath != null || extInPath.isNotEmpty) {
+      fileExtension = extInPath;
     }
-  }
+    }
 
   void _constructFile() {}
 

@@ -121,9 +121,7 @@ class PBConstraintGenerationService extends AITHandler {
   // }
 
   /// @deprecated - remove with PR to dev/stable.
-  PBIntermediateConstraints _inheritConstraintsFromChild(
-      {PBIntermediateConstraints constraints,
-      PBIntermediateConstraints childConstraints}) {
+  PBIntermediateConstraints _inheritConstraintsFromChild() {
     // if (childConstraints.pinLeft) {
     //   constraints.pinLeft = true;
     // }

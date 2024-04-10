@@ -13,10 +13,10 @@ PBSharedInstanceIntermediateNode _$PBSharedInstanceIntermediateNodeFromJson(
     Rectangle3D.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     SYMBOL_ID: json['symbolID'] as String,
     sharedParamValues: (json['overrideValues'] as List)
-        ?.map((e) => e == null
+        .map((e) => e == null
             ? null
             : PBSharedParameterValue.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+        .toList(),
     prototypeNode: PrototypeNode.prototypeNodeFromJson(
         json['prototypeNodeUUID'] as String),
     name: json['name'] as String,
@@ -44,7 +44,7 @@ Map<String, dynamic> _$PBSharedInstanceIntermediateNodeToJson(
       'name': instance.name,
       'symbolID': instance.SYMBOL_ID,
       'overrideValues':
-          instance.sharedParamValues?.map((e) => e?.toJson())?.toList(),
+          instance.sharedParamValues.map((e) => e.toJson()).toList(),
       'prototypeNodeUUID': instance.prototypeNode?.toJson(),
       'type': instance.type,
     };

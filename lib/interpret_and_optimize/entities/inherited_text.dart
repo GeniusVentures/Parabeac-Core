@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:parabeac_core/generation/generators/visual-widgets/pb_text_gen.dart';
 import 'package:parabeac_core/generation/prototyping/pb_prototype_node.dart';
 import 'package:parabeac_core/interpret_and_optimize/entities/inherited_container.dart';
@@ -81,7 +80,7 @@ class InheritedText extends PBVisualIntermediateNode
     generator = PBTextGen();
     childrenStrategy = NoChildStrategy();
 
-    if (text?.contains('\$') ?? false) {
+    if (text.contains('\$') ?? false) {
       text = _sanitizeText(text);
     }
   }

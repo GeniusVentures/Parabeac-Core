@@ -93,9 +93,6 @@ class MainInfo {
   ///
   /// This is primarly to enforce absolute and correct paths in the [MainInfo]
   String _validatePath(String path) {
-    if (path == null) {
-      return path;
-    }
     return p.normalize(p.absolute(path));
   }
 

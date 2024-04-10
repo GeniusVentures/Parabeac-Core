@@ -17,5 +17,5 @@ class PBVariable {
   @override
   bool operator ==(Object other) =>
       (other as PBVariable).variableName == variableName &&
-      (other as PBVariable).type == type;
+      (other).type == type;
 }

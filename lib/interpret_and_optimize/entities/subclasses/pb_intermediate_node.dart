@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:math';
 
 import 'package:directed_graph/directed_graph.dart';
@@ -79,11 +78,6 @@ abstract class PBIntermediateNode
         /// We are not using the [Vertex] attribute as it represents the [PBIntermediateNode]
         super(null) {
     logger = Logger(runtimeType.toString());
-    if (_UUID == null) {
-      logger.debug(
-          'Generating UUID for $runtimeType-$name as its UUID is null');
-      _UUID = Uuid().v4();
-    }
 
     if (constraints == null) {
       logger.debug(
@@ -183,7 +177,7 @@ abstract class PBIntermediateNode
 
   void mapRawChildren(Map<String, dynamic> json, PBIntermediateTree tree) {
     var rawChildren = json['children'] as List;
-    rawChildren?.forEach((rawChild) {
+    rawChildren.forEach((rawChild) {
       if (rawChild != null) {
         PBIntermediateNode.fromJson(rawChild, this, tree);
         // tree.addEdges(Vertex(rawChild), [Vertex(parent)]);

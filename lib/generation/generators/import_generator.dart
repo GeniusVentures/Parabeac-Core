@@ -30,10 +30,8 @@ class FlutterImport {
   /// empty string.
   static String importFormat(String content,
       {bool isPackage = false, bool newLine = true}) {
-    if (content != null) {
-      return 'import \'${isPackage ? 'package:' : ''}$content\';${newLine ? '\n' : ''}';
-    }
-    return '';
+    return 'import \'${isPackage ? 'package:' : ''}$content\';${newLine ? '\n' : ''}';
+      return '';
   }
 
   /// Formats the [absPath] to eliminate the path that are not within the project,
