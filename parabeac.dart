@@ -3,8 +3,6 @@ import 'dart:io';
 import 'dart:io' as io;
 import 'package:args/args.dart';
 
-ArgResults argResults;
-
 // ignore: always_declare_return_types
 main(List<String> args) async {
   var arguments = <String>['lib/main.dart'];
@@ -41,7 +39,7 @@ main(List<String> args) async {
     ..addFlag('include-styles',
         help: 'If this flag is set, it will output styles document');
 
-  argResults = parser.parse(args);
+  ArgResults argResults = parser.parse(args);
 
   //Check if no args passed or only -h/--help passed
   //stops the program after printing the help for both the
